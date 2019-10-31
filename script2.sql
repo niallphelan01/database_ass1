@@ -37,7 +37,8 @@ insert into Visit values('a1234','p12345', '12323423V','2019-10-10', '10:15:59')
 insert into Prescription values ('a1234', 't123234', 'take 2 a day before breakfast');
 
 /* list of current patient Prescriptions likr a certain last name*/
-select concat(patient.fname, ' ', patient.lname) as "Patient Name", concat(Doctor.fName, ' ', Doctor.lName) as "Dr Prescribing Drug ", drug.drugName as "Medication", prescription.dosageDetails as "Medication to be taken", concat(visit.date, '  ', visit.time) as "Prescribed on:" 
+create view CurrentPrescriptionbyPatient as
+select concat(patient.fname, ' ', patient.lname) as "Patient Name", concat(Doctor.fName, ' ', Doctor.lName) as "Dr Prescribing Drug", drug.drugName as "Medication", prescription.dosageDetails as "Medication to be taken", concat(visit.date, '  ', visit.time) as "Prescribed on:" 
 from patient join visit
 on patient.patientID = visit.patientID
 join doctor
