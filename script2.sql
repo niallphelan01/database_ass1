@@ -39,6 +39,7 @@ insert into Prescription values ('a1234', 't123234', 'take 2 a day before breakf
 create index visitDateind on visit(date);
 /*script to show the indexes from a visit*/
 show index from visit;
+select * from visit;
 
 
 /* list of current patient Prescriptions likr a certain last name*/
@@ -79,3 +80,14 @@ select count(patientID) as "Current number of patients" from Patient where disch
 select concat( fName,' ', lName), datediff(dischargeDate, arriveDate) as "Number of days in hospital"  from Patient;
 
 desc patient;
+/*To DO's
+Add more data especially for visits and prescriptions
+Add more patient etc
+
+Add a trigger statement
+Add additional index statements
+Create users and grant privilages for them etc
+Create a list of frequently used queries on the db
+*/
+
+
