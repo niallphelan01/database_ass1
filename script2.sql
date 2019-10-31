@@ -35,6 +35,11 @@ insert into Visit values('a1234','p12345', '12323423V','2019-10-10', '10:15:59')
 insert into Visit values('a1234','p12345', '12323423V','2019-10-10', '10:15:59');
 /*Prescription table*/
 insert into Prescription values ('a1234', 't123234', 'take 2 a day before breakfast');
+/*create an index on Visits as this could speed up such a search*/
+create index visitDateind on visit(date);
+/*script to show the indexes from a visit*/
+show index from visit;
+
 
 /* list of current patient Prescriptions likr a certain last name*/
 create view CurrentPrescriptionbyPatient as
