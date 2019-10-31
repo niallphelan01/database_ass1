@@ -30,7 +30,7 @@ USE hospital;
 -- Create table Ward
 -- -----------------------------------------------------
 
-create table [IF NOT EXISTS] Ward (
+create table Ward (
 wardID varchar(9),
 wardName varchar(15),
 wardType varchar(30),
@@ -41,7 +41,7 @@ primary key (wardID)
 -- Create table Patient
 -- -----------------------------------------------------
 
-create table IF NOT EXISTS] Patient(
+create table Patient(
 patientID varchar(9),
 fName varchar(20) not null,
 lName varchar(20) not null,
@@ -57,7 +57,7 @@ primary key (patientID)
 -- -----------------------------------------------------
 -- Create table Bed
 -- -----------------------------------------------------
-create table IF NOT EXISTS] Bed(
+create table Bed(
 bedNumber int,
 bedType varchar(15) not null,
 wardID varchar(9) not null,
@@ -70,7 +70,7 @@ foreign key (patientID) references Patient(patientID) on update cascade on delet
 -- -----------------------------------------------------
 -- Create table Doctor
 -- -----------------------------------------------------
-create table IF NOT EXISTS] Doctor(
+create table Doctor(
 PPS varchar(15),
 fName varchar(20) not null,
 lName varchar(20) not null,
@@ -86,7 +86,7 @@ primary key(PPS)
 -- -----------------------------------------------------
 -- Create table Drug
 -- -----------------------------------------------------
-create table IF NOT EXISTS] Drug(
+create table Drug(
 drugID varchar(15),
 drugName varchar(15),
 manufacturer varchar(15),
@@ -96,7 +96,7 @@ primary key(drugID)
 -- -----------------------------------------------------
 -- Create table Visit
 -- -----------------------------------------------------
-create table IF NOT EXISTS] Visit(
+create table Visit(
 visitID varchar(15),
 patientID varchar(9),
 PPS varchar (15),
@@ -110,7 +110,7 @@ foreign key (PPS) references Doctor(PPS) on update cascade on delete cascade
 -- -----------------------------------------------------
 -- Create table Prescription
 -- -----------------------------------------------------
-create table IF NOT EXISTS] Prescription(
+create table Prescription(
 visitID varchar(15),
 drugID varchar(15),
 dosageDetails varchar(100),
@@ -148,3 +148,10 @@ insert into Doctor values ('12323872M', 'Mary','Brien', 'Main street', 'Listowel
 insert into Bed (bedNumber,bedType, wardID, patientID) values (1, 'standard', 'stroke01','p12345');
 insert into Bed (bedNumber,bedType, wardID, patientID) values (2, 'water', 'stroke01','p12346');
 insert into Bed (bedNumber,bedType, wardID, patientID) values (3, 'hot air', 'stroke01','p12347');
+
+/*Visit table*/
+insert into Visit values('a1234','p12345', '12323423V','2019-10-10', '10:15:59');
+insert into Visit values('a12345','p12345', '12323423V','2019-10-10', '22:10:00');
+/*Prescription table*/
+insert into Prescription values ('a1234', 't123234', 'take 2 a day before breakfast');
+insert into Prescription values ('a12345', 'b1221', 'take once a day after dinner');
