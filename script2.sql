@@ -29,13 +29,36 @@ insert into Bed (bedNumber,bedType, wardID, patientID) values (3, 'hot air', 'st
 insert into Bed (bedNumber,bedType, wardID, patientID) values (21, 'hot air', 'ger01','p12348');
 insert into Bed (bedNumber,bedType, wardID, patientID) values (24, 'hot air', 'surg01','p12349');
 
+insert into Visit values('a1234','p12345', '12323423V','2019-10-10', '10:15:59');
+
+/*Visit table*/
+insert into Visit values('a1234','p12345', '12323423V','2019-10-10', '10:15:59');
+/*Prescription table*/
+insert into Prescription values ('a1234', 't123234', 'take 2 a day before breakfast');
+
+/* list of current patient Prescriptions likr a certain last name*/
+select concat(patient.fname, ' ', patient.lname) as "Patient Name", concat(Doctor.fName, ' ', Doctor.lName) as "Dr Prescribing Drug ", drug.drugName as "Medication", prescription.dosageDetails as "Medication to be taken", concat(visit.date, '  ', visit.time) as "Prescribed on:" 
+from patient join visit
+on patient.patientID = visit.patientID
+join doctor
+on visit.PPS = doctor.PPS
+join prescription
+on visit.visitID=prescription.visitID
+join drug
+on prescription.drugID=drug.drugID
+where patient.lname like '%Te%';
+
+select * from prescription;
+
+
 select fName,lName,arriveDate, bed.bedNumber
 from Patient
 natural join Bed;
 
 
 /* complete a check for current paitents i.e. patients with no discharge date and list them along with their bed number ward number and ward descritption */
-select concat( fName,' ', lName) as Name, date_format(arriveDate, '%W %M %D, %Y') as "Arrival Date" , bed.bedNumber, Ward.wardName, Ward.wardType
+create view CurrentPatientList as
+select concat( fName,' ', lName) as Name, date_format(arriveDate, '%W %M %D, %Y') as "Arrival Date" , bed.bedNumber as "Bed No.", Ward.wardName as "Ward Name", Ward.wardType
 from patient
 natural join Bed   /*Natural join can be used as field names are the same*/
 natural join Ward
